@@ -1,30 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { TestItemStateType } from '../../classes/TestItemStateType';
 
-import { getValue } from "./action";
+import { getValue } from '../../redux/actions';
 
 const Textbox = () => {
-    const exampleState: TestItemStateType = useSelector((state: any) => state.testItem);
-    const dispatch = useDispatch();
+  const exampleState: TestItemStateType = useSelector(
+    (state: any) => state.testItem
+  );
+  const dispatch = useDispatch();
 
-    // useEffect(() => { // onComponentMount
-    //     getValue(dispatch)
-    // }, [dispatch]);
-
-    return (
-        <div>
-            {
-                exampleState.isLoading ?
-                <p>Loading...</p> :
-                exampleState.isSuccess ?
-                    <p>{exampleState.textboxSuccessData.message}</p> :
-                    <p>{exampleState.textboxErrorData.message}</p>
-            }
-            <button onClick={() => getValue(dispatch)}>Click</button>
-        </div>
-    )
+  return (
+    <div>
+      {exampleState.isLoading ? (
+        <p>Loading...</p>
+      ) : exampleState.isSuccess ? (
+        <p>{exampleState.textboxSuccessData.message}</p>
+      ) : (
+        <p>{exampleState.textboxErrorData.message}</p>
+      )}
+      <button onClick={() => getValue(dispatch)}>Click</button>
+    </div>
+  );
 };
 
 export default Textbox;
